@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import CartDropdown from './CartDropdown';
+import CartDropdown from './CartDropdown.jsx';
 import "./Header.css"
 
 const Header = ({ cartItems, delFromCart, addToCart }) => {
@@ -13,7 +13,7 @@ const Header = ({ cartItems, delFromCart, addToCart }) => {
                     <Nav className="me-auto">
                         <Nav.Link href="#">Главная </Nav.Link>
                     </Nav>
-                    <CartDropdown cartItems={cartItems}  addToCart={addToCart} delFromCart={delFromCart} />
+                    <CartDropdown cartItems={cartItems}  onAddToCart={addToCart} onDelFromCart={delFromCart} />
                 </Navbar.Collapse>
             </Container>
         </Navbar>

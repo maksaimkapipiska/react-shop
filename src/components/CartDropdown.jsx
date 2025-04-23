@@ -2,7 +2,7 @@ import React from 'react';
 import { Dropdown, Badge, Button } from 'react-bootstrap';
 import './CartDropdown.css';
 
-const CartDropdown = ({ cartItems = [], addToCart, delFromCart}) => {
+const CartDropdown = ({ cartItems = [], onAddToCart, onDelFromCart}) => {
     const handleCheckout = () => {
         alert('Оформление заказа...');
     };
@@ -23,8 +23,8 @@ const CartDropdown = ({ cartItems = [], addToCart, delFromCart}) => {
                                     <div>{item.title}</div>
                                     <small>{item.price} $</small>
                                     <span className="totalItems px-2 fw-bold">{item.quantity}</span>
-                                    <button className="addToCart btn btn-success" onClick={() => addToCart(item)}>+</button>
-                                    <button className="delFromCart btn btn-danger" onClick={() => delFromCart(item.id)}>-</button>
+                                    <button className="addToCart btn btn-success" onClick={() => onAddToCart(item)}>+</button>
+                                    <button className="delFromCart btn btn-danger" onClick={() => onDelFromCart(item.id)}>-</button>
                                 </div>
                             </Dropdown.Item>
                         ))}
