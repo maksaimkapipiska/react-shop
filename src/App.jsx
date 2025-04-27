@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -7,11 +7,23 @@ import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CartDropdown from "./assets/components/CartDropdown.jsx";
 
+const defaultCartItems = localStorage.getItem('cartItems'); // достаем defaultCartItems за компонентом, чтоб этот код выполнился один раз
 
 function App() {
-    const [cartItems, setCartItems] = useState([]) ;
+    const [cartItems, setCartItems] = useState( // передаем defaultCartItems в default value у useState
+        defaultCartItems
+            ? JSON.parse(defaultCartItems)
+            : []
+    ) ;
     const [currentPage, setCurrentPage] = useState(1);
+
     const productsPerPage = 2;
+
+    useEffect(() => {
+        const cartItemsJSON = JSON.stringify(cartItems);
+        localStorage.setItem('cartItems', cartItemsJSON);
+    }, [cartItems]); // каждый раз как cartItems изменяеться добавляем все cartItems в localStorage
+
     const addToCart = (product) => {
         setCartItems(prev => {
             const found = prev.find(item => item.id === product.id);
